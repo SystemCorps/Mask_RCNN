@@ -1,0 +1,2 @@
+at samples/mlcc
+python3 mlcc2.py train --dataset=../../mlcc2 --model=imagenet
