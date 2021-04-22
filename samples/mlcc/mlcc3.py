@@ -22,7 +22,7 @@ import keras
 import tensorflow as tf
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("../../")
+ROOT_DIR = os.path.abspath("./")
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -47,7 +47,7 @@ class MLCCConfig(Config):
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 2
+    IMAGES_PER_GPU = 1
 
     # Uncomment to train on 8 GPUs (default is 1)
     # GPU_COUNT = 8
@@ -366,7 +366,7 @@ if __name__ == '__main__':
                     augmentation=augmentation)"""
         model.train(dataset_train, dataset_val,
                     learning_rate=config.LEARNING_RATE,
-                    epochs=40,
+                    epochs=1, #default 40
                     layers='heads')
 
         # Training - Stage 2
@@ -379,7 +379,7 @@ if __name__ == '__main__':
                     augmentation=augmentation)"""
         model.train(dataset_train, dataset_val,
                     learning_rate=config.LEARNING_RATE,
-                    epochs=120,
+                    epochs=2, #default 120
                     layers='4+')
 
         # Training - Stage 3
@@ -392,7 +392,7 @@ if __name__ == '__main__':
                     augmentation=augmentation)"""
         model.train(dataset_train, dataset_val,
                     learning_rate=config.LEARNING_RATE / 10,
-                    epochs=160,
+                    epochs=3, #default 160
                     layers='all')
 
     elif args.command == "evaluate":
